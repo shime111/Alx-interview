@@ -1,15 +1,21 @@
+#!/usr/bin/python3
+"""Writing a function for Pascal's Triangle"""
+
+
 def pascal_triangle(n):
+    """
+    returns a lists of integers
+    representing the Pascal’s triangle
+    """
     if n <= 0:
-        return []  # Return an empty list for non-positive n
+        return []
 
-    triangle = []
-    for i in range(n):
-        row = [1]  # First element of each row is always 1
-        for j in range(1, i):
-            # Calculate the middle elements using the previous row
-            row.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
-        if i > 0:
-            row.append(1)  # Last element of each row is also 1
-        triangle.append(row)
-
+    triangle = [[1]]
+    while len(triangle) != n:
+        previous = triangle[-1]
+        current = [1]
+        for i in range(len(previous) - 1):
+            current.append(previous[i] + previous[i + 1])
+        current.append(1)
+        triangle.append(current)
     return triangle
